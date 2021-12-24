@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Your description">
+    <meta name="author" content="Your name">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
+    <meta property="og:site_name" content="" /> <!-- website name -->
+    <meta property="og:site" content="" /> <!-- website link -->
+    <meta property="og:title" content="" /> <!-- title shown in the actual shared post -->
+    <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+    <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+    <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+    <meta name="twitter:card" content="summary_large_image"> <!-- to have large image post format in Twitter -->
+
+    <!-- Webpage Title -->
+    <title>Karworth - Resale Value Estimation</title>
+
+    <!-- Styles -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/fontawesome-all.css" rel="stylesheet">
+    <link href="/static/css/swiper.css" rel="stylesheet">
+    <link href="/static/css/magnific-popup.css" rel="stylesheet">
+    <link href="/static/css/styles.css" rel="stylesheet">
+    <!-- Favicon  -->
+    <link rel="icon" href="/static/images/favicon.png">
+</head>
+
+<body onload="loadCarModels();" data-spy="scroll" data-target=".fixed-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light">
+        <div class="container">
+            <a class="navbar-brand logo-image" href="index.html"><img src="/static/images/logo-01.png"
+                    alt="alternative"></a>
+        </div> <!-- end of container -->
+    </nav> <!-- end of navbar -->
+    <!-- end of navigation -->
+
+
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="text-container">
+                        <h1 class="h1-large">What's your car worth?</h1>
+                        <p class="p-large">Karworth is a leading valuation tool that precisely estimates the resale
+                            value of your car so you get nothing but the best price!</p>
+                        <!-- Sign Up Form -->
+                        <form method="post" accept-charset="utf-8" id="form">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="brand">Brand</label>
+                                            </div>
+                                            <select class="custom-select" id="brand" name="brand" required="1"
+                                                onchange="loadCarModels(this.id)">
+                                                {% for brandItem in brand %}
+                                                <option value="{{ brandItem }}">{{ brandItem }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="model">Model</label>
+                                            </div>
+                                            <select class="custom-select" id="model" name="model" value="model" required="1">
+                                                <option id="selectedBrand"></option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="year">Release Year</label>
+                                            </div>
+                                            <select class="custom-select" id="year" name="year" required="1">
+                                                {% for yearItem in year %}
+                                                <option value="{{ yearItem }}">{{ yearItem }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="transmission">Transmission</label>
+                                            </div>
+                                            <select class="custom-select" id="transmission" name="transmission"
+                                                required="1">
+                                                {% for transmissionItem in transmission %}
+                                                <option value="{{ transmissionItem }}">{{ transmissionItem }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="inputGroupSelect01">Engine
+                                                    Size</label>
+                                            </div>
+                                            <select class="custom-select" id="engineSize" name="engineSize"
+                                                required="1">
+                                                {% for engineSizeItem in engineSize %}
+                                                <option value="{{ engineSizeItem }}">{{ engineSizeItem }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">litre</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="fuelType">Fuel Type</label>
+                                            </div>
+                                            <select class="custom-select" id="fuelType" name="fuelType" required="1">
+                                                {% for fuelTypeItem in fuelType %}
+                                                <option value="{{ fuelTypeItem }}">{{ fuelTypeItem }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="input-group mb-3">
+                                        <input id="mpg" name="mpg" type="text" class="form-control" placeholder="Miles Per Gallon"
+                                            aria-label="Amount (to the nearest dollar)" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">Miles/Gallon</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="input-group mb-3">
+                                        <input id="mileage" name="mileage" type="text" class="form-control" placeholder="Miles Driven"
+                                            aria-label="Miles Driven" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">miles</span>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <!--<button type="button" onclick="send_data()" class="btn btn-primary btn-lg btn-block" data-toggle="modal"
+                            data-target="#exampleModalCenter">Predict Resale Price</button>-->
+
+                            <button type="submit" onclick="send_data()" class="btn btn-primary btn-lg btn-block" ><span id="predictButton">Predict</span></button>
+
+                        </form>
+
+                        <!-- end of sign up form -->
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                <div class="col-lg-5">
+                    <div class="image-container">
+                        <img class="img-fluid" src="/static/images/header2.png" alt="alternative">
+                    </div> <!-- end of image-container -->
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of header -->
+    <!-- end of header -->
+    <!-- Footer 
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer-col first">
+                        <h6>Dataset</h6>
+                        <p class="p-small">The <a style="color: #0072EC;"
+                                href="https://github.com/rajtilakls2510/car_price_predictor/blob/master/quikr_car.csv">quikr_car</a>
+                            dataset is used for the training session.</p>
+                    </div>
+                    <div class="footer-col second">
+                        <h6>Methodology</h6>
+                        <ul class="list-unstyled li-space-lg p-small">
+                            <li>Linear Regression is selected as it provides the best result.</li>
+
+                        </ul>
+                    </div>
+                    <div class="footer-col third">
+                        <h6>Developer</h6>
+                        <ul class="list-unstyled li-space-lg p-small">
+                            <li>Rony</li>
+                            <li>rony@email.com</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> end of footer -->
+    <!-- end of footer -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Predicted Resale Price</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h1 class="h1-large"><span id="resultModal"></span></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!--LOAD CAR MODELS FUNCTION-->
+    <script>
+        let modalShown = false;
+        
+        const Audi = [' A1', ' A6', ' A4', ' A3', ' Q3', ' Q5', ' A5', ' S4', ' Q2',
+            ' A7', ' TT', ' Q7', ' RS6', ' RS3', ' A8', ' Q8', ' RS4', ' RS5',
+            ' R8', ' SQ5', ' S8', ' SQ7', ' S3', ' S5', ' A2', ' RS7']
+
+        const BMW = [' 5 Series', ' 6 Series', ' 1 Series', ' 7 Series', ' 2 Series',
+            ' 4 Series', ' X3', ' 3 Series', ' X5', ' X4', ' X1', ' M4', ' X2',
+            ' X6', ' 8 Series', ' Z4', ' X7', ' M5', ' M2', ' M3', ' M6',
+            ' Z3']
+
+        const Mercedes = [' SLK', ' S Class', ' SL CLASS', ' G Class', ' GLE Class',
+            ' GLA Class', ' A Class', ' B Class', ' GLC Class', ' C Class',
+            ' E Class', ' GL Class', ' CLS Class', ' CLC Class', ' CLA Class',
+            ' V Class', ' M Class', ' CL Class', ' GLS Class', ' GLB Class',
+            ' X-CLASS', '180', ' CLK', ' R Class', '220', '200']
+
+        const Ford = [' Fiesta', ' Focus', ' Puma', ' Kuga', ' EcoSport', ' C-MAX',
+            ' Mondeo', ' Ka+', ' Tourneo Custom', ' S-MAX', ' B-MAX', ' Edge',
+            ' Tourneo Connect', ' Grand C-MAX', ' KA', ' Galaxy', ' Mustang',
+            ' Grand Tourneo Connect', ' Fusion', ' Ranger', ' Streetka',
+            ' Escort', ' Transit Tourneo']
+
+        const Hyundai = [' I20', ' Tucson', ' I10', ' IX35', ' I30', ' I40', ' Ioniq',
+            ' Kona', ' Veloster', ' IX20', ' I800', ' Santa Fe', ' Accent',
+            ' Terracan', ' Getz', ' Amica']
+
+        const Skoda = [' Octavia', ' Citigo', ' Yeti Outdoor', ' Superb', ' Kodiaq',
+            ' Rapid', ' Karoq', ' Fabia', ' Yeti', ' Scala', ' Roomster',
+            ' Kamiq']
+
+        const Toyota = [' GT86', ' Corolla', ' RAV4', ' Yaris', ' Auris', ' Aygo', ' C-HR',
+            ' Prius', ' Avensis', ' Verso', ' Hilux', ' PROACE VERSO',
+            ' Land Cruiser', ' Supra', ' Camry', ' Verso-S', ' IQ',
+            ' Urban Cruiser']
+
+        const Vauxhall = [' Corsa', ' Astra', ' Viva', ' Mokka', ' Mokka X', ' Crossland X',
+            ' Zafira', ' Meriva', ' Zafira Tourer', ' Adam', ' Grandland X',
+            ' Antara', ' Insignia', ' GTC', ' Combo Life', ' Vivaro',
+            ' Cascada', ' Kadjar', ' Agila', ' Tigra', ' Vectra']
+
+        const Volkswagen = [' T-Roc', ' Golf', ' Passat', ' T-Cross', ' Polo', ' Tiguan',
+            ' Sharan', ' Up', ' Scirocco', ' Beetle', ' Caddy Maxi Life',
+            ' Caravelle', ' Touareg', ' Arteon', ' Touran', ' Golf SV',
+            ' Amarok', ' Tiguan Allspace', ' Shuttle', ' Jetta', ' CC',
+            ' California', ' Caddy Life', ' Caddy', ' Caddy Maxi', ' Eos',
+            ' Fox']
+        function loadCarModels(id) {
+            var brandSelected = document.getElementById("brand")
+            var model = document.getElementById("model");
+            model.innerHTML = ""; //this is needed to delete model history
+            var modelOptions = [];
+            if (brandSelected.value == 'Audi') {
+                modelOptions = Audi
+            }
+            if (brandSelected.value == 'BMW') {
+                modelOptions = BMW
+            }
+            if (brandSelected.value == 'Mercedes') {
+                modelOptions = Mercedes
+            }
+            if (brandSelected.value == 'Ford') {
+                modelOptions = Ford
+            }
+            if (brandSelected.value == 'Hyundai') {
+                modelOptions = Hyundai
+            }
+            if (brandSelected.value == 'Skoda') {
+                modelOptions = Hyundai
+            }
+            if (brandSelected.value == 'Toyota') {
+                modelOptions = Toyota
+            }
+            if (brandSelected.value == 'Vauxhall') {
+                modelOptions = Vauxhall
+            }
+            if (brandSelected.value == 'Volkswagen') {
+                modelOptions = Volkswagen
+            }
+
+            for (index in modelOptions) {
+                model.options[model.options.length] = new Option(modelOptions[index], modelOptions[index]);
+            }
+            //alert(brandSelected.value)
+            //console.log(brandSelected.value);
+            //console.log(modelOptions);
+
+        }
+    
+        function form_handler(event){
+            event.preventDefault()
+        }
+        function send_data(){
+            document.querySelector('form').addEventListener('submit', form_handler)
+            var fd = new FormData(document.querySelector('form'))
+            var xhr = new XMLHttpRequest()
+            xhr.open('POST', '/predict', true)
+            document.getElementById("predictButton").innerHTML="Predicting..."
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == XMLHttpRequest.DONE){
+                    $("#exampleModalCenter").modal("toggle")
+                    document.getElementById("predictButton").innerHTML="Predict"
+                    if(parseInt(xhr.responseText) < 1){
+                        document.getElementById("resultModal").innerHTML="£ 0";
+                    }else{
+                        document.getElementById("resultModal").innerHTML="£ " + xhr.responseText;
+                    }
+                }
+            }
+            xhr.onload = function(){
+            }
+            xhr.send(fd)
+        
+        }
+    </script>
+    <script src="/static/js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script src="/static/js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+    <script src="/static/js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+    <script src="/static/js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
+    <script src="/static/js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+    <script src="/static/js/scripts.js"></script> <!-- Custom scripts -->
+</body>
+
+</html>
