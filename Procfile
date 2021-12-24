@@ -1,1 +1,1 @@
-web: gunicorn karworth:app
+web: gunicorn app:app
